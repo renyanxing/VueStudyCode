@@ -8,8 +8,38 @@
 </head>
 <body>
     <div id="app">
-
+        <h3>1.{{}}双大括号输出文本内容</h3>
+        <p>{{message}}</p>
+        <p>{{score+1 }}</p>
+        <h3>2.一次性插值v-once</h3>
+        <span v-once>{{score}}</span>
+        <h3>3.指令输出真正的html内容b-html</h3>
+        <span v-html="contenthtml"></span>
+        <h3>4.元素指令绑定v-bind</h3>
+        <span><img :src="imgUrl"></span>
+        <span><a :href="baidu">跳转</a></span>
+        <h3>5.事件绑定指令v-on</h3>
+        <span>{{number}}</span>
+        <span><input type="button" value="点击加1" @click="add"></span>
     </div>
-    <script src=""></script>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        var vm =  new Vue({
+            el:'#app',
+            data:{
+                message:'mengxuegu',
+                score:100,
+                contenthtml:'<span style="color:red">此内容为红色字体</span>',
+                imgUrl:'https://pics2.baidu.com/feed/500fd9f9d72a60592f7d27ad5d4eea9e023bba9c.jpeg?token=72a3b1dfdd31cbd9babf79d7de7355eb',
+                baidu:'http://www.baidu.com',
+                number:0
+            },
+            methods: {
+                add:function (param) {
+                    this.number+=1;
+                  }
+            },
+        });
+    </script>
 </body>
-</html>
+</html> 

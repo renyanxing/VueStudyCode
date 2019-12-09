@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>语文：<input id="yw" type="text" v-model="yuwen"></div>
+        <div>数学：<input type="text" v-model="shuxue"></div>
+        <div>英语：<input type="text" v-model="yingyu"></div>
+        <div>总分：<input type="text" v-model="sumscore"></div>
+        <div>总分（计算属性）：<input type="text" v-model="sum()"></div>
+        <div>总分（计算属性双向绑定）：<input type="text" v-model="sumscore2"></div>
+        <div>总分（监听器）：<input type="text" v-model="sumscore3"></div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        var vm =  new Vue({
+            el:'#app',
+            data:{
+               yuwen:80,
+               shuxue:90,
+               yingyu:70,
+               sumscore3:0,
+               sumscore:0
+            },
+            methods: {
+                sum:function(){
+                    debugger;
+                    console.log("sum函数调用");
+                    return (this.yuwen-0)+(this.yingyu-0)+(this.shuxue-0);
+                }
+            },
+            computed: {
+                sumscore1:function (param) {  
+                    console.log("计算属性调用");
+                    return (this.yuwen-0)+(this.yingyu-0)+(this.shuxue-0);
+                },
+                sumscore2:{
+                    get:function (param) {  
+                        console.log("计算属性get调用");
+                    return (this.yuwen-0)+(this.yingyu-0)+(this.shuxue-0);
+                    },
+                    set:function (param) {
+                        console.log("计算属性set调用");
+                        var avgscore=param/3;
+                        this.yuwen=avgscore;
+                        this.shuxue=avgscore;
+                        this.yingyu=avgscore;
+                      }
+                }
+            },
+            watch: {
+                shuxue:function(newValue,oldValue){
+                    console.log("监听到了数学分数改变")
+                    this.sumscore3=(newValue-0)+(this.yuwen-0)+(this.yingyu-0);
+                },
+                yuwen:function(newValue,oldValue){
+                    console.log("监听到了语文分数改变")
+                    this.sumscore3=(newValue-0)+(this.shuxue-0)+(this.yingyu-0);
+                },
+            },
+        });
+        vm.$watch('yingyu',function(newValue,oldValue){
+            console.log("监听到了英语分数改变")
+            this.sumscore3=(newValue-0)+(this.yuwen-0)+(this.shuxue -0); 
+         });
+        
+    </script>
+</body>
+</html> 
