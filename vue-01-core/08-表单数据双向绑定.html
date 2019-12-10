@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        <form action="#" @submit.prevent="submitForm">
+            姓名(文本)：<input type="text" v-model="name">
+            <br><br>
+            性别(单选按钮)：
+            <input name="sex" type="radio" value="1" v-model="sex" />男
+            <input name="sex" type="radio" value="0" v-model="sex"/>女
+            <br><br>
+            技能(多选框)：
+            <input type="checkbox" name="skills" value="java" v-model="skill">Java开发
+            <input type="checkbox" name="skills" value="vue" v-model="skill">Vue.js开发
+            <input type="checkbox" name="skills" value="python" v-model="skill">Python开发
+            <br><br>
+            城市(下拉框)：
+            <select name="citys" v-model='city'>
+                <option v-for="c in citys" :value="c.code">{{c.name}}</option>
+            </select>
+            <br><br>
+            说明(多行文本)：
+            <textarea cols="30" rows="5" v-model="desc"></textarea>
+            <br><br>
+            <button>提交</button type="submit">
+        </form>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        var vm =  new Vue({
+            el:'#demo',
+            data:{
+                name:'',
+                sex:'1',
+                skill:['vue'],
+                citys:[
+                    {code:'bj',name:'北京'},
+                    {code:'sh',name:'上海'},
+                    {code:'sz',name:'深圳'},
+                    {code:'tj',name:'天津'}
+                ],
+                city:'bj',
+                desc:''
+            },
+            methods: {
+                submitForm:function(){
+                    alert(this.name+','+this.sex+','+this.skill+','+this.city+','+this.desc)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

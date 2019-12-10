@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background:red;
+        }
+        .box1{
+            width: 200px;
+            height: 200px;
+            background:green;
+
+        }
+        .box2{
+            width: 200px;
+            height: 200px;
+            background:black;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>v-if 条件渲染</h3>
+        <input v-model="seen" type="checkbox">勾选后显示不同颜色小块
+        <div v-if="seen" class="box" ></div>
+        <div v-else="seen" class="box1" ></div>
+        <input v-model="seen1" type="checkbox">勾选后显示绿色小块
+        <div v-show="seen1" class="box1" ></div>
+
+        <input v-model="seen3" type="text" >
+        <div v-if="seen3==='A'" class="box" ></div>
+        <div v-else-if="seen3==='B'" class="box1" ></div>
+        <div v-else="seen3" class="box2" ></div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        var vm =  new Vue({
+            el:'#app',
+            data:{
+                seen:false,
+                seen1:false,
+                seen3:'A'
+            }
+        });
+    </script>
+</body>
+</html>

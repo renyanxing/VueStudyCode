@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .div1 {
+            background-color: red;
+            width: 200px;
+        }
+
+        ;
+
+        .div2 {
+            background-color: green;
+            width: 150px;
+        }
+
+        ;
+
+        .div3 {
+            background-color: blue;
+            width: 100px;
+        }
+
+        ;
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h3>1.事件处理方法</h3>
+        <button @click="say">Say{{msg}}</button>
+        <button @click="warn('hello',$event)">Warn</button>
+
+
+        <h3>2.事件修饰符</h3>
+        <!-- 2.1防止事件继续传播 -->
+        <div @click="toDo">
+            <button @click="doThis">单击事件会继续传播</button>
+        </div>
+        <!-- 阻止事件继续传播 -->
+        <div @click="toDo">
+            <button @click.stop="doThis">单击事件不会继续传播</button>
+        </div>
+        <br>
+        <!-- 2.2阻止组件默认行为 -->
+        <a href="http://www.baidu.com" @click.prevent="doStop">百度一下</a>
+        <!-- 2.3点击事件只会触发一次 -->
+        <br>
+        <span>{{a}}</span>
+        <button @click.once="doOnly">点击事件只会触发一次</button>
+        <br>
+        <!-- 2.4添加事件监听器时使用事件捕获模式 -->
+        <div @click.capture="doThat">
+            <button @click="doThis">事件捕获模式</button>
+        </div>
+        <!-- 2.5添加事件监听器时 -->
+        <div @click="doThat" class="div1">div1
+            <span @click.self="toDo" class="div2">div2
+                <span @click="doThis" class="div3">div3</span>
+            </span>
+        </div>
+
+        <h3>3.按键修饰符</h3>
+        <input type="text" @keyup.enter="keyEnter">
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello RYX',
+                a: 1
+            },
+            methods: {
+                say: function (event) {
+                    alert(this.msg);
+                    alert(event.target.innerHTML);
+                },
+                warn: function (msg, event) {
+                    alert(msg + ':' + event.target.innerHTML);
+                },
+                toDo: function () {
+                    alert('toDo');
+                },
+                doThis: function () {
+                    alert('doThis');
+                },
+                doThat: function () {
+                    alert('doThat')
+                },
+                doStop: function () {
+                    alert("doStop!href默认行为已被阻止");
+
+                },
+                doOnly: function () {
+                    this.a++;
+                },
+                keyEnter: function () {
+                    alert('当前按键回车键');
+                },
+                onScroll:function(){
+                    alert('onScroll');
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
