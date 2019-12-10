@@ -5,18 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        /* 显示和隐藏的过渡效果 */
+        .ryx-enter-active, .ryx-leave-active{
+            transition: opacity 1s;
+        }
+        .ryx-enter, .ryx-leave-to{
+            opacity: 0;
+        }
+        .ryx-enter-to, .ryx-leave{
+            opacity: 1;
+        }
+        .ryx1-enter-active{
+            transition: all 1s;
+        }
+        .ryx1-leave-active{
+            transition: all 5s;
+        }
+        .ryx1-enter, .ryx1-leave-to{
+            opacity: 0;
+            transform: translate(10px);
+        }
+    </style>
 </head>
 <body>
     <div id="app"> 
         <button @click="show = !show">渐变过度</button>
-        <p v-show="show">RenYanXingXiaoGeGe</p>
+        <transition name="ryx">
+            <p v-show="show" >RenYanXingXiaoGeGe</p>
+        </transition>
+        <br>
+        <button @click="show1 = !show1">渐变平滑过度</button>
+        <transition name="ryx1">
+            <p v-show="show1" >RenYanXingXiaoGeGe</p>
+        </transition>
     </div>
     <script src="./node_modules/vue/dist/vue.js"></script>
     <script>
         var vm =  new Vue({
             el:'#app',
             data : {
-                show:true
+                show:false,
+                show1:false
             }
         })
     </script>
