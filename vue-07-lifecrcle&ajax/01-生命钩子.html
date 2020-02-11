@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>生命周期</title>
+</head>
+
+<body>
+    <div id="app">
+        {{message}}
+
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            //el: '#app',
+            data: {
+                message: '任彦行'
+            },
+            beforeCreate() {
+                //vue实例创建前
+                console.log('beforeCreate被调用！', this.$el, this.$data)
+
+            },
+            created() {
+                //vue实例创建后
+                console.log('created被调用', this.$el, this.$data)
+            },
+            beforeMount() {
+                //vue实例数据挂载前
+                console.log('beforeMount被调用', this.$el, this.$data)
+            },
+            mounted() {
+                //vue实例数据挂载后
+                console.log('mounted被调用', this.$el, this.$data)
+            },
+            beforeUpdate() {
+                //vue实例数据更新前
+                console.log('beforeUpdate被调用', this.$el.innerHTML, this.$data)
+            },
+            updated() {
+
+                //vue实例数据更新后
+                console.log('updated被调用', this.$el.innerHTML, this.$data)
+            },
+            beforeDestroy() {
+                
+                //销毁vue实例前
+                console.log('beforeDestroy被调用', this.$el)
+            },
+            destroyed() {
+                
+                //销毁vue实例后
+                console.log('destroyed被调用', this.$el)
+            },
+        })
+        .$mount('#app');
+        // vm.$destroy();
+    </script>
+</body>
+
+</html>
